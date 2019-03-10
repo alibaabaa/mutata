@@ -10,7 +10,7 @@
 ## Get a bcrypt to file
 
 ```
-> mutata -input=test -outfile=file.dat bcrypt(4)
+> mutata -input=test -outfile=file.dat bcrypt
 > cat file.dat
 $2y$04$IpATSc1115UFXBYnMnr5pOvMeE0cdrKXb1D0n9f7dGAVoQvspqnAe
 ```
