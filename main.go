@@ -15,6 +15,7 @@ type flagData struct {
 	infile     string
 	input      string
 	outfile    string
+	showInput  bool
 	transforms []string
 }
 
@@ -22,9 +23,10 @@ func getFlagData() flagData {
 	infile := flag.String("infile", "", "file input data")
 	input := flag.String("input", "", "string input data")
 	outfile := flag.String("outfile", "", "output file")
+	showInput := flag.Bool("show-input", false, "prints input data to stdout")
 
 	flag.Parse()
-	return flagData{*infile, *input, *outfile, flag.Args()}
+	return flagData{*infile, *input, *outfile, *showInput, flag.Args()}
 }
 
 func getRandFromInput(input string) []byte {
@@ -79,11 +81,22 @@ func getInputData(fData flagData) ([]byte, error) {
 	return fileData, nil
 }
 
+func transformInput(input []byte) string {
+	toHex := getTransformer("hex")
+	return string(toHex(input))
+}
+
 func main() {
 	fData := getFlagData()
 	inputData, err := getInputData(fData)
 	if err != nil {
 		panic(err)
+	}
+
+	if fData.showInput {
+		fmt.Println("Input (hex):")
+		fmt.Println(transformInput(inputData))
+		fmt.Println()
 	}
 
 	result := inputData
@@ -93,5 +106,5 @@ func main() {
 		result = transformer(result)
 	}
 
-	fmt.Println(string(result))
+	fmt.Print(string(result))
 }
