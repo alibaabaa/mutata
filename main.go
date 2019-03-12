@@ -87,10 +87,10 @@ func main() {
 	}
 
 	result := inputData
-	var transformer Transformer
+	var transformer transform
 	for i := 0; i < len(fData.transforms); i++ {
 		transformer = getTransformer(fData.transforms[i])
-		result = transformer.Transform(result)
+		result = transformer(result)
 	}
 
 	fmt.Println(string(result))

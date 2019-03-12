@@ -1,22 +1,20 @@
 package main
 
-// Transformer transforms data from one format to another
-type Transformer interface {
-	Transform([]byte) []byte
-}
+// Transform transforms data from one format to another
+type transform func(in []byte) []byte
 
-func getTransformer(transformer string) Transformer {
+func getTransformer(transformer string) transform {
 	if transformer == "base64" {
-		return Base64Transformer{}
+		return Base64
 	}
 	if transformer == "bcrypt" {
-		return BCryptTransformer{}
+		return BCrypt
 	}
 	if transformer == "hex" {
-		return HexTransformer{}
+		return Hex
 	}
 	if transformer == "md5" {
-		return Md5Transformer{}
+		return Md5
 	}
 
 	panic("No matching transformer found for " + transformer)
