@@ -1,4 +1,4 @@
-package main
+package transformers
 
 import "encoding/base64"
 

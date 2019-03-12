@@ -1,4 +1,4 @@
-package main
+package transformers
 
 import "golang.org/x/crypto/bcrypt"
 

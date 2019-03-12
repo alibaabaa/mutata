@@ -1,4 +1,4 @@
-package main
+package transformers
 
 import "crypto/md5"
 
