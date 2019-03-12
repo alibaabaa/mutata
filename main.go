@@ -81,9 +81,13 @@ func getInputData(fData flagData) ([]byte, error) {
 	return fileData, nil
 }
 
-func transformInput(input []byte) string {
-	toHex := getTransformer("hex")
-	return string(toHex(input))
+func runTransforms(input []byte, transfomers []string) []byte {
+	result := input
+	for i := 0; i < len(transfomers); i++ {
+		transformer := getTransformer(transfomers[i])
+		result = transformer(result)
+	}
+	return result
 }
 
 func main() {
@@ -95,16 +99,18 @@ func main() {
 
 	if fData.showInput {
 		fmt.Println("Input (hex):")
-		fmt.Println(transformInput(inputData))
+		fmt.Println(string(runTransforms(inputData, []string{"hex"})))
 		fmt.Println()
 	}
 
-	result := inputData
-	var transformer transform
-	for i := 0; i < len(fData.transforms); i++ {
-		transformer = getTransformer(fData.transforms[i])
-		result = transformer(result)
-	}
+	result := runTransforms(inputData, fData.transforms)
 
-	fmt.Print(string(result))
+	if fData.outfile != "" {
+		err := ioutil.WriteFile(fData.outfile, result, 0644)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		fmt.Print(string(result))
+	}
 }
