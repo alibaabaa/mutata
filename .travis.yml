@@ -1,1 +1,17 @@
 language: go
+
+before_install:
+  go get
+
+script:
+  go build
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: C5PEtyRuWIJVERzWFUAsmN8Wc3uc8lDGvyLNyRUZzSiy8pb9xWzdgQzi+nuBU/2XSohILRJ1rlfaw1j1MSE9QMTeWvL/B1y8dav227EQgen++XSuVbYNibkI04o08DY0zsgWpp9rP02yE+ovSb6MlqUdSbBFfTQ9E2TuJhPgo+7tz4iCY/vE+UgSEOeK7a0U45/78biwYt7Vi4XH6yQFDO+lNixWMfWKHY92iR5+OnwYDnHP78IxPJwQNJFy0CbIA5ihcjcaaINQLimJHoumLFt+a+v8zXs+MmgNRIDhCYj4VLBbRIYjXvspQpsp6yu62x27aHi+CXSmH19BiYtJKWHMOElaWan3MIcphz5+chvmN7jBP96Y99gxw73PryIhX/gLWrnjrjY+gkSxDfUiVVk7UMj7/kqPqDSdlHw8KSCUcWZjLPPie8IVoKdr7uEIb7+yPRHvz2zppm8sLVxIovEcgCKXD8lryINuFGWjFZnxeCmQcC+pdlYlZhR6IGLouLXdfmEaAYqn+yNcjnbyL54QaemHNWcmuE5jlHFFgncD/hs5Z2mADXow1q99KZ6pQ/n3r2tqkAhNYjwH0sXDp8wBKovWJykvZuxWxEuRhYJDHWB1/EXpyzIDHfBLWB5+DSd6TlHhok/wlJx+WFZc/MhM2RdCeweKbRUE+B26w4k=
+  file: mutata.exe
+  on:
+    repo: alibaabaa/mutata
+    tags: true
