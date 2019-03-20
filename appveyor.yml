@@ -1,0 +1,38 @@
+version: 0.0.0-{build}
+
+platform: x64
+
+branches:
+  only:
+    - master
+
+clone_folder: c:\gopath\src\github.com\alibaabaa\mutata
+
+environment:
+  GOPATH: c:\gopath
+
+install:
+  - echo %PATH%
+  - echo %GOPATH%
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - go version
+  - go env
+
+build_script:
+  - go build -o .bin\mutata.exe -i .
+
+artifacts:
+  - path: .bin/mutata.exe
+    name: binary
+
+deploy:
+  release: mutata-$(appveyor_build_version)
+  description: 'Mutata release'
+  provider: GitHub
+  auth_token:
+    secure: wYoSKPrKEocPtMfwl8wpo1qMOEzCb/wMg+gOtbgapFwAVt30r2cEIcCu2tiD5/lS
+  artifact: binary # This is the name we specified in the artifacts section.
+  draft: false
+  prerelease: true
+  on:
+    branch: master
