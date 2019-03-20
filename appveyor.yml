@@ -2,10 +2,6 @@ version: 0.1.0-{build}
 
 platform: x64
 
-branches:
-  only:
-    - master
-
 clone_folder: c:\gopath\src\github.com\alibaabaa\mutata
 
 environment:
@@ -27,7 +23,7 @@ artifacts:
     name: mutata.exe
 
 deploy:
-  release: Mutata $(APPVEYOR_REPO_TAG_NAME)
+  release: Mutata 0.1.0
   description: 'Mutata Windows binary'
   provider: GitHub
   auth_token:
@@ -35,4 +31,4 @@ deploy:
   artifact: mutata.exe
   draft: false
   on:
-    APPVEYOR_REPO_TAG: true
+    branch: release
