@@ -27,7 +27,7 @@ artifacts:
     name: mutata.exe
 
 deploy:
-  release: mutata-$(APPVEYOR_REPO_TAG)
+  release: Mutata $(APPVEYOR_REPO_TAG_NAME)
   description: 'Mutata Windows binary'
   provider: GitHub
   auth_token:
