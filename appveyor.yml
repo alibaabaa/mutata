@@ -1,4 +1,4 @@
-version: 0.0.0-{build}
+version: 0.1.0-{build}
 
 platform: x64
 
@@ -24,16 +24,15 @@ build_script:
 
 artifacts:
   - path: .bin/mutata.exe
-    name: binary
+    name: mutata.exe
 
 deploy:
-  release: mutata-$(appveyor_build_version)
-  description: 'Mutata release'
+  release: mutata-$(APPVEYOR_REPO_TAG)
+  description: 'Mutata Windows binary'
   provider: GitHub
   auth_token:
     secure: wYoSKPrKEocPtMfwl8wpo1qMOEzCb/wMg+gOtbgapFwAVt30r2cEIcCu2tiD5/lS
-  artifact: binary # This is the name we specified in the artifacts section.
+  artifact: mutata.exe
   draft: false
-  prerelease: true
   on:
-    branch: master
+    APPVEYOR_REPO_TAG: true
