@@ -81,11 +81,12 @@ func getInputData(fData flagData) ([]byte, error) {
 	return fileData, nil
 }
 
-func runTransforms(input []byte, transfomers []string) []byte {
+func runMutations(input []byte, mutations []string) []byte {
 	result := input
-	for i := 0; i < len(transfomers); i++ {
-		transformer := getTransformer(transfomers[i])
-		result = transformer(result)
+	mutationRegister := getMutations()
+	for i := 0; i < len(mutations); i++ {
+		mutation := mutationRegister[mutations[i]]
+		result = mutation(result)
 	}
 	return result
 }
@@ -99,11 +100,11 @@ func main() {
 
 	if fData.showInput {
 		fmt.Println("Input (hex):")
-		fmt.Println(string(runTransforms(inputData, []string{"hex"})))
+		fmt.Println(string(runMutations(inputData, []string{"hex"})))
 		fmt.Println()
 	}
 
-	result := runTransforms(inputData, fData.transforms)
+	result := runMutations(inputData, fData.transforms)
 
 	if fData.outfile != "" {
 		err := ioutil.WriteFile(fData.outfile, result, 0644)
