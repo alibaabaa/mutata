@@ -21,3 +21,12 @@ Calculate the MD5 hash of a file
 $ mutata.exe -infile="README.md" md5 hex
 c408d4a41f05106ca299b65310ab5c7d
 ```
+
+## Supported Mutations
+
+- `base64`
+- `bcrypt`
+- `hex`
+- `md5`
+- `sha1`
+- `sha256`

@@ -23,7 +23,7 @@ artifacts:
     name: mutata.exe
 
 deploy:
-  release: Mutata 0.1.0
+  release: Mutata 0.2.0
   description: 'Mutata Windows binary'
   provider: GitHub
   auth_token:
