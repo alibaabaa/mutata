@@ -17,6 +17,7 @@ func getMutations() mutationRegister {
 	register.add(mutations.HexMutation())
 	register.add(mutations.Md5Mutation())
 	register.add(mutations.Sha1Mutation())
+	register.add(mutations.Sha256Mutation())
 
 	return register
 }
